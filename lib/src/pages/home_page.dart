@@ -47,21 +47,18 @@ class _HomePageState extends State<HomePage> {
     //https://www.youtube.com/watch?v=Ws7K6eNcu-8
     // geo:40.717988192775195,-73.98946180781252
 
-     String futureString = 'https://www.youtube.com/watch?v=Ws7K6eNcu-8';
-    // try {
-    //     futureString =  await   new QRCodeReader().scan();
-    //   } catch (error) {
-    //     futureString = error.toString();
-    //   }
+     String futureString;
+    try {
+        futureString =  await   new QRCodeReader().scan();
+      } catch (error) {
+        futureString = error.toString();
+      }
   
 
     if(futureString !=null){
 
         final scan = ScanModel(valor: futureString);
         scansBloc.agregarScan(scan);
-        
-       final scan2 = ScanModel(valor: 'geo:40.717988192775195,-73.98946180781252');
-        scansBloc.agregarScan(scan2);
 
         if(Platform.isIOS){
           Future. delayed(Duration(milliseconds: 750), (){
@@ -70,7 +67,6 @@ class _HomePageState extends State<HomePage> {
         }else{
             utils.abrirScan(context, scan);
         }
-
     }
 
   }
